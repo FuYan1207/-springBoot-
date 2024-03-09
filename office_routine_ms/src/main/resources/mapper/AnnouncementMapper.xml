@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuyan.office_routine_ms.mapper.AnnouncementMapper">
+    <insert id="add">
+        insert into announcements(title, content, publisher, publish_date)
+        values (#{title},#{content},#{publisher},now())
+    </insert>
+
+    <select id="getAll" resultType="com.fuyan.office_routine_ms.pojo.Announcements">
+        select * from announcements;
+    </select>
+
+    <delete id="delById">
+        delete from announcements where announcement_id = #{id}
+    </delete>
+
+</mapper>

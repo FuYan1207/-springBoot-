@@ -1,0 +1,31 @@
+##连接数据库
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/office_routine_ms?serverTimezone=GMT%2b16&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: 123456
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      lettuce:
+        pool:
+          max-active: 10
+          max-idle: 10
+          min-idle: 1
+          time-between-eviction-runs: 10s
+
+
+##mybatis
+# 开启驼峰命名的转换
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  # 映射文件位置
+  mapper-locations: classpath:mapper/*Mapper.xml
+
+##logging:
+##  level:
+##    com.hexadecimal: debug

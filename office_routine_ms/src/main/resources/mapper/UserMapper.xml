@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuyan.office_routine_ms.mapper.UserMapper">
+    <select id="findByUsername" resultType="com.fuyan.office_routine_ms.pojo.User">
+        select * from users where username = #{username}
+    </select>
+
+    <insert id="add">
+        insert into users(username, password, create_date,employee_id, permission,status)
+        values(#{username},#{password},now(),#{employeeId},#{permission},'1')
+    </insert>
+
+    <update id="updatePermission">
+        update users set permission = #{permission} where user_id = #{id}
+    </update>
+
+    <update id="updatePassword">
+        update users set password = #{pasword} where user_id = #{ids}
+    </update>
+
+    <select id="getAll" resultType="com.fuyan.office_routine_ms.pojo.User">
+        select * from users
+        <if test="input != ''">
+            where username like concat('%',#{inpute},'%')
+        </if>
+    </select>
+
+    <delete id="delete">
+        delete from users where employee_id in
+        <foreach collection="ids" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="updateStarus">
+        update users set status = #{status} where user_id = #{userId}
+    </update>
+
+</mapper>

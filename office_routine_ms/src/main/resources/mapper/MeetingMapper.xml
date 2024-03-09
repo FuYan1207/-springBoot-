@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuyan.office_routine_ms.mapper.MeetingMapper">
+    <select id="getAll" resultType="com.fuyan.office_routine_ms.pojo.Meetings">
+        select * from meetings
+    </select>
+
+    <insert id="add">
+        insert into meetings(meeting_topic, participants, meeting_date, meeting_place, president)
+        values (#{meetingTopic},#{participants},#{meetingDate},#{meetingPlace},#{president})
+    </insert>
+
+    <select id="count" resultType="java.lang.Integer">
+        select count(meeting_id)
+        from meetings;
+    </select>
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuyan.office_routine_ms.mapper.EmployeeMapper">
+
+    <select id="getNames" resultType="com.fuyan.office_routine_ms.pojo.Employee">
+        select * from employees where employee_id != #{employeeId}
+    </select>
+
+    <select id="getAll" resultType="com.fuyan.office_routine_ms.pojo.Employee">
+        select * from employees
+        <if test="input != ''">
+        where name like concat('%',#{inpute},'%')
+        </if>
+    </select>
+
+    <insert id="add">
+        insert into employees(name, position, contact_info, hire_date,gender,age)
+        values (#{name},#{position},#{contactInfo},curdate(),#{gender},#{age})
+    </insert>
+
+    <delete id="delete">
+        delete from employees where employee_id in
+        <foreach collection="ids" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getId" resultType="java.lang.Integer">
+        select employee_id from employees where name=#{name} and contact_info=#{contactInfo}
+    </select>
+
+    <update id="update">
+        update employees set
+        name = #{name},age = #{age},gender = #{gender},contact_info = #{contactInfo},position = #{position}
+        where employee_id = #{employeeId}
+    </update>
+
+    <select id="findEmployeeNameById" resultType="java.lang.String">
+        select name from employees where employee_id = #{employeeId}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        select count(employee_id) from employees;
+    </select>
+
+</mapper>
